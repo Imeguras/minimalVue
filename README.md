@@ -51,3 +51,9 @@ Android - 11 RKQ1.200826.002
         android:name="android.hardware.camera"
         android:required="false" />
 23º Error: The Google Barcode Scanner Module is not available. You must install it first
+24º Done this to arrive at the same destination
+![1705331842739](image/README/1705331842739.png)
+25º implementation 'com.google.android.gms:play-services-code-scanner:16.1.0' onto app/.../build.gradle
+26º installed @capacitor-mlkit/barcode-scanning? i did it on the main repo
+27º npx ionic cap sync
+28º for some reason i got humbled... it "works"(camera opens so...)

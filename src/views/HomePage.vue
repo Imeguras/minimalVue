@@ -6,18 +6,6 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
-      <div id="container">
-        <strong>Ready to create an app?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-      </div>
-    </ion-content>
   </ion-page>
 </template>
 
@@ -27,11 +15,35 @@ import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
 export default {
   name: "HomePage", 
   components: {
-    IonContent, IonHeader, IonPage, IonTitle, IonToolbar
+    IonContent, IonHeader, IonPage, IonTitle, IonToolbar, BarcodeScanner
   }, 
+  
   mounted() {
-    BarcodeScanner.scan();
+    this.prepareBarcode(); 
+    this.scanBarcode();
+    
+
   },
+  deactivated() {
+    this.stopScan();
+  },
+  beforeUnmount() {
+    this.stopScan();
+  },
+  methods: {
+    async prepareBarcode(){
+      const t = BarcodeScanner.checkPermission({ force: true });
+      return t;
+    },
+    async scanBarcode() {
+      const { barcodes } = BarcodeScanner.startScan().then((barcodes) => {
+        console.log('Barcode data', barcodes);
+      }).catch((err) => {
+        console.log('Error', err);
+      });
+
+    }
+  }
 }
 </script>
 

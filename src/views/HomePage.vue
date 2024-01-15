@@ -21,8 +21,18 @@
   </ion-page>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+export default {
+  name: "HomePage", 
+  components: {
+    IonContent, IonHeader, IonPage, IonTitle, IonToolbar
+  }, 
+  mounted() {
+    BarcodeScanner.scan();
+  },
+}
 </script>
 
 <style scoped>
